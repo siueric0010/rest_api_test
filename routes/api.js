@@ -11,7 +11,11 @@ router.get('/ninjas', function(req,res) {
 
 // post request: add ninja to DB
 router.post('/ninjas', function(req,res) {
-  res.send({type:'POST'}); // sends object saying what request they made
+  console.log(req.body);
+  res.send({
+    type:'POST',
+    name: req.body.name,
+    rank: req.body.rank}); // sends object saying what request they made
 });
 
 // update ninja in the db (id is a parameter that is required to get the right ninja)

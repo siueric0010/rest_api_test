@@ -1,7 +1,16 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+
+
 const routes = require('./routes/api'); // knows it's js, so not need for .js
 // set up express
 const app = express();
+
+// ****** Important to put body parser middleware above the routes middleware b/c we need access by this point
+app.use(bodyParser.json())
+
+
+
 
 // Initiliaze routes
 app.use('/api', routes); // the app will use the route '/api' adds the api route
