@@ -1,10 +1,16 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-
+const mongoose = require('mongoose');
 
 const routes = require('./routes/api'); // knows it's js, so not need for .js
 // set up express
 const app = express();
+
+// connect to mongoDB, will create ninjago database if it doesn't exist
+mongoose.connect('mongodb://localhost/ninjago');
+mongoose.Promise = global.Promise; // override bc mongoose promise is deprecated
+
+
 
 // ****** Important to put body parser middleware above the routes middleware b/c we need access by this point
 app.use(bodyParser.json())

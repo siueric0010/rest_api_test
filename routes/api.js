@@ -1,6 +1,7 @@
 
 const express = require('express');
 const router = express.Router();
+const Ninja = require('../models/ninja');
 
 
 
@@ -11,11 +12,12 @@ router.get('/ninjas', function(req,res) {
 
 // post request: add ninja to DB
 router.post('/ninjas', function(req,res) {
-  console.log(req.body);
-  res.send({
-    type:'POST',
-    name: req.body.name,
-    rank: req.body.rank}); // sends object saying what request they made
+  // var ninja = new Ninja(req.body);
+  // ninja.save(); // saves to mongo database in ninja colection
+  Ninja.create(req.body).then(function(ninja){
+
+    res.send(ninja); // sends object saying what request they made
+  }); // does the above two comments in one line; then only fires when action is complete
 });
 
 // update ninja in the db (id is a parameter that is required to get the right ninja)
